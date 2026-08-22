@@ -33,6 +33,14 @@ window.CONY_CONFIG = {
   youtube:     '',
   email:       'hello@example.com',    // ⚠️
 
+  /* ---- 「关于我」左栏的照片井（想加就往数组里塞，布局自动排）----
+     第 1 张最大，之后每两张一行。建议竖构图，宽 1080px 左右即可。 */
+  gallery: [
+    'assets/about.jpg',
+    'assets/sydney-1.jpg',
+    'assets/sydney-2.jpg',
+  ],
+
   /* ---- 视频（留空数组则整块不显示）----
      小红书没有对外嵌入接口，只能做外链卡片（type:'link'）。
      首选 mp4：视频是她自己的，自己托管最快也最稳，海外访客一定打得开。

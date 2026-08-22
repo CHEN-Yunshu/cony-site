@@ -49,6 +49,30 @@ window.CONY_I18N = {
       ko: '이 항목을 입력해 주세요',
       th: 'กรุณากรอกช่องนี้',
     },
+    yr1: {
+      en: 'Flew to Korea alone',
+      zh: '一个人飞到韩国',
+      ko: '혼자 한국으로',
+      th: 'บินมาเกาหลีคนเดียว',
+    },
+    yr2: {
+      en: 'Master\'s in Sydney',
+      zh: '回悉尼读硕士',
+      ko: '시드니 석사 과정',
+      th: 'เรียนโทที่ซิดนีย์',
+    },
+    yr3: {
+      en: 'Graduated, flew back',
+      zh: '毕业，飞回首尔',
+      ko: '졸업 후 다시 서울',
+      th: 'จบแล้วบินกลับโซล',
+    },
+    yr4: {
+      en: 'Licensed in Seoul',
+      zh: '拿到首尔登记证',
+      ko: '서울시 등록 완료',
+      th: 'ได้ใบอนุญาตที่โซล',
+    },
     misc1: {
       en: 'About',
       zh: '关于我',

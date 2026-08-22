@@ -229,14 +229,64 @@ nav{display:flex;align-items:center;gap:34px;height:66px}
 
 /* ---------- about ---------- */
 .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:start}
-.about-photo{
-  aspect-ratio:3/4;background:var(--sage);border-radius:2px;overflow:hidden;
-  position:sticky;top:90px;                      /* 右侧故事很长，照片跟着走 */
-  display:flex;align-items:flex-end;padding:20px;
+.about-side{display:flex;flex-direction:column;gap:26px}
+
+/* 照片井：第一张压场，之后两两一行，各自以不同速率位移做出景深 */
+.well{display:grid;gap:14px}
+.well .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.shot{
+  position:relative;overflow:hidden;border-radius:2px;background:var(--sage);
+  cursor:zoom-in;border:0;padding:0;width:100%;display:block;
+}
+.shot img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transform:scale(1.16) translateY(var(--py,0px));   /* 放大 16%，给视差留余量 */
+  transition:transform .1s linear,filter 1.4s ease;
+  filter:saturate(.9);
+}
+.shot:hover img{filter:saturate(1.04)}
+.shot.lead{aspect-ratio:3/4}
+.shot.small{aspect-ratio:4/5}
+.shot::after{
+  content:'';position:absolute;inset:0;background:rgba(27,29,23,0);
+  transition:background .3s var(--ease);
+}
+.shot:hover::after{background:rgba(27,29,23,.08)}
+.shot:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* 放大看 */
+.lightbox{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;
+  background:rgba(27,29,23,.9);padding:24px;cursor:zoom-out}
+.lightbox.on{display:flex}
+.lightbox img{max-width:min(92vw,700px);max-height:88vh;object-fit:contain;border-radius:2px}
+.lightbox .x{position:absolute;top:20px;right:22px;background:transparent;border:0;color:var(--paper);
+  font-size:26px;line-height:1;cursor:pointer;padding:8px}
+
+/* 年份轴：她的故事本来就是一条时间线，左边这块空地正好放它 */
+.years{list-style:none;margin-top:26px;position:relative;padding-left:2px}
+.years::before{content:'';position:absolute;left:4px;top:10px;bottom:10px;width:1px;background:var(--line)}
+.years li{position:relative;padding:11px 0 11px 26px;cursor:default}
+.years li::before{
+  content:'';position:absolute;left:0;top:17px;width:9px;height:9px;border-radius:50%;
+  background:var(--paper-2);border:1px solid var(--muted);
+  transition:background .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease);
+}
+.years li.on::before{background:var(--sage-deep);border-color:var(--sage-deep);transform:scale(1.35)}
+.years b{display:block;font-size:15px;font-weight:500;letter-spacing:-.01em;
+  color:var(--muted);transition:color .4s var(--ease);font-variant-numeric:tabular-nums}
+.years li.on b{color:var(--ink)}
+.years span{display:block;font-size:13px;color:var(--muted);line-height:1.45;margin-top:1px}
+.years li.on span{color:var(--ink)}
+@media(max-width:880px){
+  .about-side{position:static;top:auto}
+  .years{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;margin-top:22px}
+  .years::before{display:none}
 }
 .about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* 图还没放进来时，让占位是「看得见的空位」而不是隐形的洞 */
-.ph{position:relative;font-size:12px;letter-spacing:.06em;color:#F6F4EE;text-shadow:0 1px 12px rgba(30,34,26,.55)}
+.ph{position:relative;font-size:12px;letter-spacing:.06em;color:#F6F4EE;
+  text-shadow:0 1px 12px rgba(30,34,26,.55);transition:opacity .3s}
+.photo-rv.has-img .ph{opacity:0}          /* 图到位就撤掉占位字 */
 .about-body p{margin-bottom:18px;max-width:58ch}
 .credlist{list-style:none;margin-top:30px;border-top:1px solid var(--line-soft)}
 .credlist li{
@@ -589,10 +639,14 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
 <!-- ============ ABOUT ============ -->
 <section id="about" style="background:var(--paper-2)">
   <div class="wrap about-grid">
-    <div class="about-photo photo-rv">
-      <!-- ⚠️ 替换：assets/about.jpg（建议用悉尼大学毕业那张） -->
-      <img src="assets/about.jpg" alt="" onerror="this.style.display='none'">
-      <span class="ph">assets/about.jpg</span>
+    <div class="about-side">
+      <div class="well" id="well"></div>
+      <ol class="years" id="years">
+        <li data-p="1"><b>2023</b><span data-i18n="yr1"></span></li>
+        <li data-p="3"><b>2024</b><span data-i18n="yr2"></span></li>
+        <li data-p="4"><b>2025</b><span data-i18n="yr3"></span></li>
+        <li data-p="5"><b>2026</b><span data-i18n="yr4"></span></li>
+      </ol>
     </div>
     <div class="about-body">
       <div class="eyebrow gl-host" data-i18n="about1"></div>
@@ -689,7 +743,8 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
               d="M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132"/>
         <g id="nodes"></g>
         <path class="plane" style="offset-path:path('M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132');offset-rotate:auto"
-              d="M0,-5 L13,0 L0,5 L3,0 Z"/>
+              d="M15,0 L3,2.6 L-4.5,10 L-8,10 L-3,2.6 L-11,2.6 L-14,6 L-16,6 L-14.6,0
+                 L-16,-6 L-14,-6 L-11,-2.6 L-3,-2.6 L-8,-10 L-4.5,-10 L3,-2.6 Z"/>
         <text class="cityA" x="40" y="158" text-anchor="start">SYD · BKK · PVG</text>
         <text class="cityB" x="960" y="158" text-anchor="end">HOME</text>
       </svg>
@@ -928,6 +983,12 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
   <a href="#faq" data-i18n="partners8"></a>
 </div>
 
+<!-- 放大看 -->
+<div class="lightbox" id="lightbox">
+  <button class="x" aria-label="Close" onclick="closeBox()">&times;</button>
+  <img id="lbimg" src="" alt="">
+</div>
+
 <!-- wechat modal -->
 <div class="modal" id="wxmodal" onclick="if(event.target===this)closeWx()">
   <div class="modal-in">
@@ -1019,6 +1080,7 @@ function renderDynamic(){
   buildChannels();
   buildSocials();
   buildVideos();
+  buildWell();
 
   const bb = document.getElementById('booking-block');
   if(C.bookingUrl){ bb.style.display='block'; document.getElementById('booking-link').href = C.bookingUrl; }
@@ -1180,7 +1242,7 @@ function openChat(){
   if(LANG==='zh' && C.wechatId){ openWx(); }
   else { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
 }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeWx(); closeMenu(); } });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeWx(); closeMenu(); closeBox(); } });
 
 /* ---------- 手机导航 ---------- */
 const menubtn = document.getElementById('menubtn');
@@ -1310,6 +1372,7 @@ function paint(){
   const doc = document.documentElement;
   const sp = doc.scrollTop / Math.max(1, doc.scrollHeight - doc.clientHeight);
   doc.style.setProperty('--sp', (sp * 100).toFixed(2) + '%');
+  parallax();
 }
 
 addEventListener('scroll', ()=>{
@@ -1337,12 +1400,90 @@ function measureCircle(){
   });
 }
 
+/* 照片井：第 1 张压场，之后每两张一行 */
+function buildWell(){
+  const well = document.getElementById('well');
+  if(!well) return;
+  const list = (C.gallery || []).filter(Boolean);
+  well.innerHTML = '';
+  if(!list.length) return;
+
+  const shot = (src, cls)=>{
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'shot ' + cls;
+    b.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+    b.addEventListener('click', ()=>openBox(src));
+    b.querySelector('img').addEventListener('error', ()=>b.remove());
+    return b;
+  };
+  well.appendChild(shot(list[0], 'lead reveal'));
+  for(let i = 1; i < list.length; i += 2){
+    const row = document.createElement('div');
+    row.className = 'row reveal';
+    row.style.setProperty('--d', (0.06 * i).toFixed(2) + 's');
+    row.appendChild(shot(list[i], 'small'));
+    if(list[i+1]) row.appendChild(shot(list[i+1], 'small'));
+    well.appendChild(row);
+  }
+}
+
+/* 视差：每张图按自己在视口里的位置错开位移，做出景深。
+   图本身放大了 1.14，位移才不会露边。 */
+let shots = [];
+function collectShots(){ shots = [...document.querySelectorAll('.shot img')]; }
+function parallax(){
+  if(REDUCED || !shots.length) return;
+  const mid = innerHeight / 2;
+  shots.forEach((img, i)=>{
+    const r = img.parentElement.getBoundingClientRect();
+    if(r.bottom < -200 || r.top > innerHeight + 200) return;
+    // 位移幅度按图片自身高度推算，永远小于放大 1.16 留出的余量(高度的 8%)，
+    // 否则小图会被推出边界露白
+    const off = Math.max(-1, Math.min(1, ((r.top + r.height / 2) - mid) / mid));
+    const amp = r.height * (0.045 + (i % 3) * 0.012);      // 每张速率略不同，做出景深
+    img.style.setProperty('--py', (-off * amp).toFixed(1) + 'px');
+  });
+}
+
+function openBox(src){
+  document.getElementById('lbimg').src = src;
+  document.getElementById('lightbox').classList.add('on');
+}
+function closeBox(){ document.getElementById('lightbox').classList.remove('on'); }
+document.getElementById('lightbox').addEventListener('click', e=>{
+  if(e.target.id !== 'lbimg') closeBox();
+});
+
+/* 年份轴跟着阅读进度走 */
+let yearIO;
+function syncYears(){
+  const ps = [...document.querySelectorAll('.about-body p')];
+  const lis = [...document.querySelectorAll('#years li')];
+  if(!ps.length || !lis.length) return;
+  if(yearIO) yearIO.disconnect();
+  let seen = new Set();
+  yearIO = new IntersectionObserver(ens=>{
+    ens.forEach(en=>{
+      const i = ps.indexOf(en.target);
+      if(en.isIntersecting) seen.add(i); else seen.delete(i);
+    });
+    const top = seen.size ? Math.max(...seen) : -1;
+    let active = -1;
+    lis.forEach((li,k)=>{ if(+li.dataset.p <= top) active = k; });
+    lis.forEach((li,k)=> li.classList.toggle('on', k <= active));
+  }, {threshold:.5});
+  ps.forEach(el=>yearIO.observe(el));
+}
+
 /* 图到位了才撤掉骨架微光 */
 function watchPhotos(){
   document.querySelectorAll('.photo-rv').forEach(box=>{
     const img = box.querySelector('img');
     if(!img) return box.classList.add('loaded');
-    const done = ()=>box.classList.add('loaded');
+    const done = ()=>{
+      box.classList.add('loaded');
+      if(img.naturalWidth > 0) box.classList.add('has-img');   // 有图才盖掉占位字
+    };
     if(img.complete) done(); else { img.addEventListener('load', done, {once:true});
                                     img.addEventListener('error', done, {once:true}); }
   });
@@ -1351,10 +1492,13 @@ function watchPhotos(){
 function decorate(){
   measureCircle();
   watchPhotos();
+  collectShots();
   splitLines();
   addGloss();
   buildRoute();
   syncRoute();
+  syncYears();
+  parallax();
   observe();
   paint();
   clearTimeout(safety);
