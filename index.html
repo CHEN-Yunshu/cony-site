@@ -77,6 +77,11 @@ section{padding:clamp(64px,9vw,124px) 0;position:relative}
 .reveal.in{opacity:1;transform:none}
 
 /* 图片：先褪色+从下往上显影，再回到全色 */
+.photo-rv:not(.loaded){background-image:linear-gradient(100deg,
+  rgba(239,235,224,0) 24%,rgba(239,235,224,.16) 42%,rgba(239,235,224,0) 60%);
+  background-size:220% 100%;animation:shimmer 1.9s linear infinite}
+@keyframes shimmer{to{background-position:-220% 0}}
+@media (prefers-reduced-motion:reduce){ .photo-rv:not(.loaded){animation:none} }
 .photo-rv img{
   clip-path:inset(0 0 100% 0);filter:saturate(.18) contrast(1.06);
   transition:clip-path 1.25s var(--ease),filter 1.6s .25s ease;
@@ -136,8 +141,33 @@ nav{display:flex;align-items:center;gap:34px;height:66px}
 }
 .langtoggle:hover{color:var(--ink);border-color:var(--muted)}
 .langtoggle:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.menubtn{display:none;border:0;background:transparent;cursor:pointer;padding:8px}
+.menubtn{display:none;border:0;background:transparent;cursor:pointer;padding:8px;color:var(--ink);
+  margin-left:-4px;border-radius:2px}
 .menubtn svg{display:block}
+.menubtn svg path{transition:transform .32s var(--ease),opacity .2s ease;transform-origin:center}
+.menubtn[aria-expanded="true"] .l1{transform:translateY(6px) rotate(45deg)}
+.menubtn[aria-expanded="true"] .l2{opacity:0}
+.menubtn[aria-expanded="true"] .l3{transform:translateY(-6px) rotate(-45deg)}
+.menubtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* 悬浮下拉面板：不改变文档流高度，也就不依赖任何高度动画技巧 */
+.mobnav{
+  display:none;position:absolute;left:0;right:0;top:100%;
+  background:var(--paper);border-bottom:1px solid var(--line);
+  box-shadow:0 18px 30px -22px rgba(27,29,23,.4);
+  max-height:calc(100vh - 66px);overflow-y:auto;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .26s var(--ease),transform .26s var(--ease),visibility 0s .26s;
+}
+@media(max-width:880px){ .mobnav{display:block} }
+.mobnav.open{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .26s var(--ease),transform .26s var(--ease);
+}
+.mobnav a{display:block;padding:15px 28px;font-size:17px;letter-spacing:-.01em;
+  border-top:1px solid var(--line-soft)}
+.mobnav a:first-child{border-top:0}
+.mobnav a:active{background:var(--paper-2)}
 
 /* ---------- hero ---------- */
 .hero{padding-top:clamp(40px,5.5vw,74px);padding-bottom:clamp(40px,5vw,68px)}
@@ -152,6 +182,26 @@ nav{display:flex;align-items:center;gap:34px;height:66px}
 }
 .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .portrait span{position:relative;color:#F6F4EE;text-shadow:0 1px 12px rgba(30,34,26,.55)}
+
+/* 手绘圈：把她最硬的那个数字圈出来，像自己拿笔划的 */
+.circled{position:relative;display:inline-block}
+.circled svg{position:absolute;left:-14%;top:-26%;width:128%;height:152%;overflow:visible;pointer-events:none}
+.circled path{fill:none;stroke:var(--sage-deep);stroke-width:2.2;stroke-linecap:round;opacity:.85;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len);
+  transition:stroke-dashoffset 1.15s var(--ease) .55s}
+.circled.in path{stroke-dashoffset:0}
+
+/* 印章：她的登记证上就盖着一枚，做一枚自己的，不模仿官方印 */
+.stamp{
+  position:absolute;right:14px;top:50%;width:74px;height:74px;margin-top:-37px;
+  transform:rotate(-11deg);opacity:.92;pointer-events:none;
+}
+.stamp circle{fill:none;stroke:#B4705C;stroke-width:1.6}
+.stamp .inner{stroke-width:.9;opacity:.65}
+.stamp text{fill:#B4705C;font-size:8.4px;letter-spacing:.16em;text-anchor:middle;font-weight:500}
+.licencecard{position:relative}
+.licencecard .txt{padding-right:78px}
+@media(max-width:600px){ .stamp{display:none} .licencecard .txt{padding-right:0} }
 
 /* ---------- trust strip ---------- */
 .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0}
@@ -215,30 +265,60 @@ nav{display:flex;align-items:center;gap:34px;height:66px}
 .step h3{font-size:21px}
 .step p{font-size:15px;color:var(--on-sage-2);line-height:1.6}
 
-/* ---- 钉住模式（≥881px 且用户没关动效时由 JS 开启）---- */
-.pinned #how-inner{position:sticky;top:0;height:100vh;display:flex;align-items:center}
-.pinned .steps{border:0;position:relative;min-height:290px}
-.pinned .step{
-  position:absolute;inset:0;display:block;padding:0;border:0;
-  opacity:0;transform:translateY(26px);pointer-events:none;
-  transition:opacity .6s var(--ease),transform .6s var(--ease);
+/* ---- 航线图：她的客人是飞过来的，流程画成一段航程 ---- */
+.route{margin:0 0 clamp(28px,4vw,52px);position:relative}
+.route svg{width:100%;height:auto;display:block;overflow:visible}
+.route .trail{fill:none;stroke:rgba(239,235,224,.42);stroke-width:1.5;stroke-dasharray:5 7;
+  stroke-linecap:round;stroke-dashoffset:0}
+.route .trail-done{fill:none;stroke:var(--on-sage);stroke-width:1.5;stroke-linecap:round;
+  transition:stroke-dashoffset 2.1s var(--ease)}
+.route .node{cursor:pointer}
+.route .node circle{fill:var(--sage-block);stroke:rgba(239,235,224,.55);stroke-width:1.5;
+  transition:fill .45s var(--ease),stroke .45s var(--ease),r .35s var(--ease)}
+.route .node text{fill:var(--on-sage-2);font-size:11px;letter-spacing:.06em;
+  text-anchor:middle;transition:fill .45s var(--ease)}
+.route .node .lbl{font-size:11.5px;letter-spacing:.01em}
+.route .node:hover circle,.route .node:focus-visible circle{fill:var(--on-sage);stroke:var(--on-sage)}
+.route .node:hover text,.route .node:focus-visible text{fill:var(--on-sage)}
+.route .node:hover .idx,.route .node:focus-visible .idx{fill:var(--sage-block)}
+.route .node.on circle{fill:var(--on-sage);stroke:var(--on-sage)}
+.route .node.on .idx{fill:var(--sage-block)}
+.route .node.on .lbl{fill:var(--on-sage)}
+.route .plane{fill:var(--on-sage);opacity:0}
+.route.in .plane{opacity:1;animation:fly 2.4s var(--ease) forwards}
+@keyframes fly{from{offset-distance:0%}to{offset-distance:100%}}
+.route .cityA,.route .cityB{fill:var(--on-sage-2);font-size:11px;letter-spacing:.12em}
+@media(max-width:760px){ .route{display:none} }      /* 窄屏挤不下，列表已经够清楚 */
+@media (prefers-reduced-motion:reduce){
+  .route .trail-done{transition:none}
+  .route.in .plane{animation:none;offset-distance:100%}
 }
-.pinned .step.on{opacity:1;transform:none;pointer-events:auto}
-.pinned .step .step-n{display:none}
-.pinned .step h3{font-size:clamp(30px,3.4vw,46px);letter-spacing:-.03em;margin-bottom:18px;max-width:16ch}
-.pinned .step p{font-size:clamp(16px,1.35vw,19px);max-width:44ch;line-height:1.62}
-.pin-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(40px,6vw,90px);align-items:center;width:100%}
-.pin-left .head{margin-bottom:38px}
 
-/* 进度条：一格一步，走到哪亮到哪 */
-.rail{display:flex;gap:7px;margin-bottom:16px}
-.rail i{flex:1;height:2px;background:rgba(239,235,224,.32);position:relative;overflow:hidden}
-.rail i::after{content:'';position:absolute;inset:0;background:var(--paper);
-  transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
-.rail i.done::after{transform:scaleX(1)}
-.counter{font-size:12px;letter-spacing:.16em;color:var(--on-sage-2);font-variant-numeric:tabular-nums}
-.pin-progress{display:none}
-.pinned .pin-progress{display:block}
+/* ---- 流程时间轴：五步一次看全，可扫读，不劫持滚动 ---- */
+.flow{list-style:none;position:relative;margin-top:6px}
+.flow::before{                       /* 串起五个节点的竖线 */
+  content:'';position:absolute;left:26px;top:26px;bottom:26px;width:1px;
+  background:rgba(239,235,224,.26);
+}
+.fstep{
+  display:grid;grid-template-columns:54px 1fr;gap:clamp(20px,3vw,46px);
+  padding:clamp(18px,2.2vw,26px) 0;align-items:start;
+}
+.fnum{
+  position:relative;z-index:1;width:54px;height:54px;border-radius:50%;
+  display:grid;place-items:center;font-size:13px;letter-spacing:.06em;
+  background:var(--sage-block);border:1px solid rgba(239,235,224,.42);
+  color:var(--on-sage-2);font-variant-numeric:tabular-nums;
+  transition:background .55s var(--ease),color .55s var(--ease),border-color .55s var(--ease);
+}
+.fstep.in .fnum{background:var(--on-sage);color:var(--sage-block);border-color:var(--on-sage)}
+.fstep h3{font-size:clamp(20px,2vw,27px);margin-bottom:9px;letter-spacing:-.02em}
+.fstep p{font-size:clamp(15px,1.15vw,16.5px);color:var(--on-sage-2);line-height:1.62;max-width:58ch}
+@media(max-width:700px){
+  .flow::before{left:19px;top:20px;bottom:20px}
+  .fstep{grid-template-columns:40px 1fr;gap:16px;padding:16px 0}
+  .fnum{width:40px;height:40px;font-size:11.5px}
+}
 
 /* ---------- comparison ---------- */
 .compare{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border:1px solid var(--line);font-size:14.5px}
@@ -318,6 +398,21 @@ details[open] summary{color:var(--ink)}
 .chan .ic{width:22px;flex:0 0 22px}
 .chan .meta{margin-left:auto;font-size:12.5px;color:var(--on-sage-2)}
 form{display:grid;gap:12px}
+.field.err input,.field.err textarea{border-color:#E8A48F;background:rgba(232,164,143,.14)}
+.field.err{animation:shake .42s var(--ease)}
+@keyframes shake{
+  0%,100%{transform:translateX(0)} 18%{transform:translateX(-6px)}
+  38%{transform:translateX(5px)}   58%{transform:translateX(-3px)} 78%{transform:translateX(2px)}
+}
+.errmsg{font-size:12.5px;color:#F0BCA9;display:none}
+.field.err .errmsg{display:block}
+@media (prefers-reduced-motion:reduce){ .field.err{animation:none} }
+
+/* 提交中：按钮自己变成进度条，不用另起一个 loading */
+.btn.busy{position:relative;overflow:hidden;pointer-events:none;opacity:.85}
+.btn.busy::before{content:'';position:absolute;left:0;top:0;bottom:0;width:100%;
+  background:rgba(27,29,23,.14);transform:translateX(-100%);animation:sweep 1.1s var(--ease) infinite}
+@keyframes sweep{to{transform:translateX(100%)}}
 .field{display:grid;gap:6px}
 .field label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-sage-2)}
 input,textarea,select{
@@ -342,6 +437,19 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
 .foot-grid a:hover{color:var(--paper)}
 .socials{display:flex;gap:18px;flex-wrap:wrap}
 .footnote{margin-top:40px;padding-top:22px;border-top:1px solid rgba(239,235,224,.2);font-size:12px;color:#A8A69C;line-height:1.6;max-width:70ch}
+
+/* 触屏没有 hover，必须给按下的即时反馈，否则用户不知道点没点到 */
+@media (hover:none){
+  .btn:active{transform:scale(.97)}
+  .chan:active{background:rgba(239,235,224,.2);transform:none}
+  .card:active{background:#F1EEE4}
+  .card:active::after{transform:scaleX(1)}
+  .vid:active{opacity:.85}
+  summary:active{color:var(--sage-deep)}
+  .sticky button:active,.sticky a:active{background:var(--paper-2)}
+  .sticky .primary:active{background:var(--sage-dark)}
+}
+.btn,.chan,.card,.vid{-webkit-tap-highlight-color:transparent}
 
 /* ---------- mobile sticky ---------- */
 .sticky{
@@ -382,6 +490,8 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
   .compare .h{margin-top:22px}
   .navlinks{display:none}
   .menubtn{display:block}
+  nav{gap:14px}
+  .brand{margin-right:auto}
   .sticky{display:flex}
   body{padding-bottom:52px}
 }
@@ -397,8 +507,24 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
       <a href="#faq"     data-i18n="misc4"></a>
     </div>
     <select class="langtoggle" id="langsel" aria-label="Language" onchange="setLang(this.value)"></select>
+    <button class="menubtn" id="menubtn" aria-label="Menu" aria-expanded="false" aria-controls="mobnav">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+        <path class="l1" d="M0 1h20" stroke="currentColor" stroke-width="1.6"/>
+        <path class="l2" d="M0 7h20" stroke="currentColor" stroke-width="1.6"/>
+        <path class="l3" d="M0 13h20" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+    </button>
     <a href="#contact" class="btn sm" data-i18n="misc5"></a>
   </nav>
+  <div class="mobnav" id="mobnav">
+    <div>
+      <a href="#about"    data-i18n="misc1"></a>
+      <a href="#services" data-i18n="misc2"></a>
+      <a href="#how"      data-i18n="misc3"></a>
+      <a href="#faq"      data-i18n="misc4"></a>
+      <a href="#contact"  data-i18n="contact1"></a>
+    </div>
+  </div>
 </header>
 
 <!-- ============ HERO ============ -->
@@ -423,7 +549,9 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
 <!-- ============ TRUST ============ -->
 <section class="trust">
   <div class="wrap trust-grid reveal">
-    <div><span class="trust-n" id="st-sessions"></span><span class="trust-l" data-i18n="trust1"></span></div>
+    <div><span class="circled"><span class="trust-n" id="st-sessions"></span>
+      <svg viewBox="0 0 120 60" aria-hidden="true"><path d="M92,13 C86,5 60,2 36,7 C12,12 4,26 8,38 C12,50 38,57 64,54 C90,51 108,42 106,30 C104,20 92,14 78,11"/></svg>
+    </span><span class="trust-l" data-i18n="trust1"></span></div>
     <div><span class="trust-n" id="st-since"></span><span class="trust-l" data-i18n="trust2"></span></div>
     <div><span class="trust-n" id="st-licensed"></span><span class="trust-l" data-i18n="trust3"></span></div>
     <div><span class="trust-n">中 · EN · 한</span><span class="trust-l" data-i18n="trust4"></span></div>
@@ -489,10 +617,16 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
       <div class="licencecard reveal" style="--d:.12s">
         <!-- ⚠️ 替换：assets/licence.jpg（登记证扫描件，地址等敏感信息可打码） -->
         <img src="assets/licence.jpg" alt="" onerror="this.style.visibility='hidden'">
-        <div>
+        <div class="txt">
           <b data-i18n="about18"></b>
           <span data-i18n="about19"></span>
         </div>
+        <svg class="stamp" viewBox="0 0 80 80" aria-hidden="true">
+          <circle cx="40" cy="40" r="35"/>
+          <circle class="inner" cx="40" cy="40" r="29"/>
+          <text x="40" y="36">LICENSED</text>
+          <text x="40" y="49">2026.02</text>
+        </svg>
       </div>
     </div>
   </div>
@@ -541,47 +675,63 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
 
 <!-- ============ HOW IT WORKS ============ -->
 <section id="how" class="sageblock">
- <div id="how-inner">
-  <div class="wrap pin-grid">
-   <div class="pin-left">
+  <div class="wrap">
     <div class="head">
       <div class="eyebrow gl-host" data-i18n="how1"></div>
-      <h2 class="lines lines" style="margin-top:14px" data-i18n="how2"></h2>
+      <h2 class="lines" style="margin-top:14px" data-i18n="how2"></h2>
     </div>
-    <div class="pin-progress">
-      <div class="rail" id="rail"></div>
-      <div class="counter"><span id="cnum">01</span> / 05</div>
+    <div class="route reveal" id="route" aria-hidden="true">
+      <svg viewBox="0 0 1000 168" role="img">
+        <!-- 起飞爬升 -> 巡航 -> 下降落地 -->
+        <path id="rt" class="trail"
+              d="M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132"/>
+        <path id="rtdone" class="trail-done"
+              d="M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132"/>
+        <g id="nodes"></g>
+        <path class="plane" style="offset-path:path('M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132');offset-rotate:auto"
+              d="M0,-5 L13,0 L0,5 L3,0 Z"/>
+        <text class="cityA" x="40" y="158" text-anchor="start">SYD · BKK · PVG</text>
+        <text class="cityB" x="960" y="158" text-anchor="end">HOME</text>
+      </svg>
     </div>
-   </div>
-    <div class="steps" id="steps">
-      <div class="step">
-        <div class="step-n">01</div>
-        <h3 data-i18n="how3"></h3>
-        <p data-i18n="how4"></p>
-      </div>
-      <div class="step">
-        <div class="step-n">02</div>
-        <h3 data-i18n="how5"></h3>
-        <p data-i18n="how6"></p>
-      </div>
-      <div class="step">
-        <div class="step-n">03</div>
-        <h3 data-i18n="how7"></h3>
-        <p data-i18n="how8"></p>
-      </div>
-      <div class="step">
-        <div class="step-n">04</div>
-        <h3 data-i18n="how9"></h3>
-        <p data-i18n="how10"></p>
-      </div>
-      <div class="step">
-        <div class="step-n">05</div>
-        <h3 data-i18n="how11"></h3>
-        <p data-i18n="how12"></p>
-      </div>
-    </div>
+    <ol class="flow">
+      <li class="fstep reveal" style="--d:0.00s">
+        <span class="fnum">01</span>
+        <div>
+          <h3 data-i18n="how3"></h3>
+          <p data-i18n="how4"></p>
+        </div>
+      </li>
+      <li class="fstep reveal" style="--d:0.08s">
+        <span class="fnum">02</span>
+        <div>
+          <h3 data-i18n="how5"></h3>
+          <p data-i18n="how6"></p>
+        </div>
+      </li>
+      <li class="fstep reveal" style="--d:0.16s">
+        <span class="fnum">03</span>
+        <div>
+          <h3 data-i18n="how7"></h3>
+          <p data-i18n="how8"></p>
+        </div>
+      </li>
+      <li class="fstep reveal" style="--d:0.24s">
+        <span class="fnum">04</span>
+        <div>
+          <h3 data-i18n="how9"></h3>
+          <p data-i18n="how10"></p>
+        </div>
+      </li>
+      <li class="fstep reveal" style="--d:0.32s">
+        <span class="fnum">05</span>
+        <div>
+          <h3 data-i18n="how11"></h3>
+          <p data-i18n="how12"></p>
+        </div>
+      </li>
+    </ol>
   </div>
- </div>
 </section>
 
 <!-- ============ COMPARE ============ -->
@@ -712,14 +862,16 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
     </div>
     <div>
       <div class="eyebrow" style="margin-bottom:16px" data-i18n="contact7"></div>
-      <form id="cform" class="reveal" style="--d:.16s">
+      <form id="cform" class="reveal" style="--d:.16s" novalidate>
         <div class="field">
           <label data-i18n="contact8"></label>
           <input name="name" required data-i18n-ph="contact9">
+          <span class="errmsg"></span>
         </div>
         <div class="field">
           <label data-i18n="contact10"></label>
           <input name="contact" required data-i18n-ph="contact11">
+          <span class="errmsg"></span>
         </div>
         <div class="field">
           <label data-i18n="contact12"></label>
@@ -900,6 +1052,66 @@ function buildSocials(){
   add('Email', C.email ? 'mailto:'+C.email : '');
 }
 
+/* ---------- 航线图 ----------
+   节点位置直接从路径上取，改路径不用改坐标 */
+const ROUTE_LBL = {
+  en:['Say hi','Your plan','Booking','In Korea','Aftercare'],
+  zh:['先聊聊','出方案','排期','在韩陪同','术后跟进'],
+  ko:['첫 연락','방안','예약','현지 동행','사후 관리'],
+  th:['ทัก','แผน','จอง','ที่เกาหลี','ดูแลหลัง'],
+};
+function buildRoute(){
+  const svg = document.querySelector('#route svg');
+  if(!svg) return;
+  const path = svg.querySelector('#rt'), g = svg.querySelector('#nodes');
+  const total = path.getTotalLength(), n = 5;
+  const done = svg.querySelector('#rtdone');
+  done.style.strokeDasharray = total; done.style.strokeDashoffset = total;
+
+  g.innerHTML = '';
+  const lbl = ROUTE_LBL[LANG] || ROUTE_LBL.en;
+  for(let i = 0; i < n; i++){
+    const pt = path.getPointAtLength(total * (i / (n - 1)));
+    const up = pt.y < 90;                       // 巡航段标签放下面，起降段放上面
+    const a = document.createElementNS('http://www.w3.org/2000/svg','a');
+    a.setAttribute('href', '#how');
+    a.setAttribute('class', 'node');
+    a.dataset.i = i;
+    a.innerHTML =
+      `<circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="15"></circle>` +
+      `<text class="idx" x="${pt.x.toFixed(1)}" y="${(pt.y+4).toFixed(1)}">0${i+1}</text>` +
+      `<text class="lbl" x="${pt.x.toFixed(1)}" y="${(up ? pt.y+38 : pt.y-26).toFixed(1)}">${lbl[i]}</text>`;
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const step = document.querySelectorAll('.fstep')[i];
+      if(step) step.scrollIntoView({behavior: REDUCED ? 'auto' : 'smooth', block:'center'});
+    });
+    g.appendChild(a);
+  }
+  // 露出时把航线画完
+  new IntersectionObserver((en, ob)=>{
+    if(!en[0].isIntersecting) return;
+    done.style.strokeDashoffset = 0;
+    ob.disconnect();
+  }, {threshold:.3}).observe(svg);
+}
+
+/* 列表滚到哪一步，航线上对应的点就亮 */
+let routeIO;
+function syncRoute(){
+  const steps = [...document.querySelectorAll('.fstep')];
+  if(!steps.length || !document.querySelector('#nodes')) return;
+  if(routeIO) routeIO.disconnect();
+  routeIO = new IntersectionObserver(ens=>{
+    ens.forEach(en=>{
+      const i = steps.indexOf(en.target);
+      const node = document.querySelector(`#nodes .node[data-i="${i}"]`);
+      if(node) node.classList.toggle('on', en.isIntersecting);
+    });
+  }, {threshold:.55});
+  steps.forEach(st=>routeIO.observe(st));
+}
+
 /* ---------- video ----------
    小红书没有可用的 embed，只能做外链卡片。
    YouTube 用「点了才加载」的做法：不点就不请求 YouTube，页面更快也更干净。 */
@@ -968,18 +1180,53 @@ function openChat(){
   if(LANG==='zh' && C.wechatId){ openWx(); }
   else { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
 }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeWx(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeWx(); closeMenu(); } });
+
+/* ---------- 手机导航 ---------- */
+const menubtn = document.getElementById('menubtn');
+const mobnav  = document.getElementById('mobnav');
+function closeMenu(){ mobnav.classList.remove('open'); menubtn.setAttribute('aria-expanded','false'); }
+menubtn.addEventListener('click', ()=>{
+  const open = mobnav.classList.toggle('open');
+  menubtn.setAttribute('aria-expanded', String(open));
+});
+mobnav.addEventListener('click', e=>{ if(e.target.tagName === 'A') closeMenu(); });
+document.addEventListener('click', e=>{     // 点面板和按钮以外的地方就收起
+  if(!mobnav.classList.contains('open')) return;
+  if(!mobnav.contains(e.target) && !menubtn.contains(e.target)) closeMenu();
+});
+addEventListener('resize', ()=>{ if(innerWidth > 880) closeMenu(); });
 
 /* ---------- form ---------- */
+/* 先在本地校验：哪个框空了就抖一下并说清楚，比浏览器默认气泡友好得多 */
+function validate(form){
+  let firstBad = null;
+  form.querySelectorAll('[required]').forEach(inp=>{
+    const field = inp.closest('.field');
+    const bad = !inp.value.trim();
+    field.classList.toggle('err', bad);
+    if(bad){
+      field.querySelector('.errmsg').textContent = T('js_required');
+      if(!firstBad) firstBad = inp;
+      inp.addEventListener('input', ()=>field.classList.remove('err'), {once:true});
+    }
+  });
+  if(firstBad){ firstBad.focus(); return false; }
+  return true;
+}
+
 document.getElementById('cform').addEventListener('submit', async e=>{
   e.preventDefault();
   const out = document.getElementById('formresult');
+  if(!validate(e.target)) return;
+  const btn = e.target.querySelector('button[type=submit]');
   out.style.display='block';
   if(!C.formspreeId){
     out.textContent = T('js_form_off');
     return;
   }
   out.textContent = T('js_sending');
+  btn.classList.add('busy');
   try{
     const r = await fetch('https://formspree.io/f/'+C.formspreeId, {
       method:'POST', headers:{'Accept':'application/json'}, body:new FormData(e.target)
@@ -988,6 +1235,8 @@ document.getElementById('cform').addEventListener('submit', async e=>{
     if(r.ok) e.target.reset();
   }catch(err){
     out.textContent = T('js_error');
+  }finally{
+    btn.classList.remove('busy');
   }
 });
 
@@ -1048,42 +1297,19 @@ function observe(){
       io.unobserve(en.target);
     });
   }, { threshold:.16, rootMargin:'0px 0px -8% 0px' });
-  document.querySelectorAll('.reveal,.lines,.photo-rv,.gl-host,.compare,.trust-n')
+  document.querySelectorAll('.reveal,.lines,.photo-rv,.gl-host,.compare,.trust-n,.circled')
     .forEach(el=>io.observe(el));
 }
 
 /* 滚动进度条 + 钉住式流程推进，合并进一个 rAF */
-const stepEls = () => [...document.querySelectorAll('#steps .step')];
-let pinning = false, ticking = false;
+let ticking = false;
 
-function setupPin(){
-  const how = document.getElementById('how');
-  pinning = window.innerWidth > 880 && !REDUCED;
-  how.classList.toggle('pinned', pinning);
-  const n = stepEls().length;
-  how.style.height = pinning ? `${100 + (n - 1) * 78}vh` : '';
-  const rail = document.getElementById('rail');
-  if(rail && rail.children.length !== n)
-    rail.innerHTML = Array.from({length:n}, ()=>'<i></i>').join('');
-  paint();
-}
-
+/* 只剩滚动进度条了；钉住式流程已经拆掉 —— 它劫持滚动、内容撑不满，
+   而且用户没法一眼扫完五步。改成一次全部可见的时间轴 + 航线图。 */
 function paint(){
   const doc = document.documentElement;
   const sp = doc.scrollTop / Math.max(1, doc.scrollHeight - doc.clientHeight);
   doc.style.setProperty('--sp', (sp * 100).toFixed(2) + '%');
-
-  if(!pinning) return;
-  const how = document.getElementById('how');
-  const r = how.getBoundingClientRect();
-  const span = Math.max(1, how.offsetHeight - window.innerHeight);
-  const k = Math.min(1, Math.max(0, -r.top / span));
-  const steps = stepEls(), n = steps.length;
-  const idx = Math.min(n - 1, Math.floor(k * n * 0.999));
-  steps.forEach((el,i)=> el.classList.toggle('on', i === idx));
-  [...document.querySelectorAll('#rail i')].forEach((el,i)=> el.classList.toggle('done', i <= idx));
-  const c = document.getElementById('cnum');
-  if(c) c.textContent = String(idx + 1).padStart(2,'0');
 }
 
 addEventListener('scroll', ()=>{
@@ -1096,22 +1322,46 @@ addEventListener('scroll', ()=>{
 addEventListener('visibilitychange', ()=>{
   if(document.visibilityState === 'visible'){ ticking = false; paint(); }
 });
-addEventListener('pageshow', ()=>{ ticking = false; setupPin(); });
+addEventListener('pageshow', ()=>{ ticking = false; paint(); });
 
 let rt;
-addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(setupPin, 160); });
+addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(()=>{ buildRoute(); syncRoute(); }, 160); });
 
 /* setLang 会重写 innerHTML，所以每次切语言都得重新装一遍 */
 let safety;
+/* 手绘圈的描边动画要知道路径总长 */
+function measureCircle(){
+  document.querySelectorAll('.circled path').forEach(pth=>{
+    const L = Math.ceil(pth.getTotalLength());
+    pth.parentElement.parentElement.style.setProperty('--len', L);
+  });
+}
+
+/* 图到位了才撤掉骨架微光 */
+function watchPhotos(){
+  document.querySelectorAll('.photo-rv').forEach(box=>{
+    const img = box.querySelector('img');
+    if(!img) return box.classList.add('loaded');
+    const done = ()=>box.classList.add('loaded');
+    if(img.complete) done(); else { img.addEventListener('load', done, {once:true});
+                                    img.addEventListener('error', done, {once:true}); }
+  });
+}
+
 function decorate(){
+  measureCircle();
+  watchPhotos();
   splitLines();
   addGloss();
+  buildRoute();
+  syncRoute();
   observe();
-  setupPin();
+  paint();
   clearTimeout(safety);
   safety = setTimeout(()=>{                       // 动效永远不能挡住内容
     document.querySelectorAll('.reveal,.lines,.photo-rv,.gl-host')
       .forEach(el=>el.classList.add('in'));
+    document.querySelectorAll('.circled').forEach(el=>el.classList.add('in'));
   }, 2600);
   requestAnimationFrame(()=>document.body.classList.add('ready'));
 }

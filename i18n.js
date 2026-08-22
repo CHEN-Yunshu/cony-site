@@ -43,6 +43,12 @@ window.CONY_I18N = {
       ko: '재생',
       th: 'เล่นวิดีโอ',
     },
+    js_required: {
+      en: 'Please fill this in',
+      zh: '这一栏还没填',
+      ko: '이 항목을 입력해 주세요',
+      th: 'กรุณากรอกช่องนี้',
+    },
     misc1: {
       en: 'About',
       zh: '关于我',
