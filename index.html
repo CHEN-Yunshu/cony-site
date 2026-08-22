@@ -334,14 +334,17 @@ nav{display:flex;align-items:center;gap:34px;height:66px}
 .route .node.on circle{fill:var(--on-sage);stroke:var(--on-sage)}
 .route .node.on .idx{fill:var(--sage-block)}
 .route .node.on .lbl{fill:var(--on-sage)}
-.route .plane{fill:var(--on-sage);opacity:0}
-.route.in .plane{opacity:1;animation:fly 2.4s var(--ease) forwards}
-@keyframes fly{from{offset-distance:0%}to{offset-distance:100%}}
+.route .plane{fill:var(--on-sage);opacity:0;offset-distance:0%}
+.route.in .plane{animation:fly 8s linear infinite, flyfade 8s linear infinite}
+@keyframes fly{from{offset-distance:0%} to{offset-distance:100%}}
+/* 起点淡入、终点淡出，回到起点的那一帧就看不见了 */
+@keyframes flyfade{0%{opacity:0} 7%{opacity:1} 90%{opacity:1} 100%{opacity:0}}
 .route .cityA,.route .cityB{fill:var(--on-sage-2);font-size:11px;letter-spacing:.12em}
 @media(max-width:760px){ .route{display:none} }      /* 窄屏挤不下，列表已经够清楚 */
 @media (prefers-reduced-motion:reduce){
   .route .trail-done{transition:none}
-  .route.in .plane{animation:none;offset-distance:100%}
+  /* 不动就停在巡航段中点，别压在节点上 */
+  .route .plane,.route.in .plane{animation:none;opacity:1;offset-distance:50%}
 }
 
 /* ---- 流程时间轴：五步一次看全，可扫读，不劫持滚动 ---- */
@@ -741,10 +744,10 @@ footer{background:var(--sage-dark);color:#CBC9BE;padding:56px 0 40px;font-size:1
               d="M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132"/>
         <path id="rtdone" class="trail-done"
               d="M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132"/>
-        <g id="nodes"></g>
         <path class="plane" style="offset-path:path('M40,132 C210,132 250,36 500,36 C750,36 790,132 960,132');offset-rotate:auto"
               d="M15,0 L3,2.6 L-4.5,10 L-8,10 L-3,2.6 L-11,2.6 L-14,6 L-16,6 L-14.6,0
                  L-16,-6 L-14,-6 L-11,-2.6 L-3,-2.6 L-8,-10 L-4.5,-10 L3,-2.6 Z"/>
+        <g id="nodes"></g>
         <text class="cityA" x="40" y="158" text-anchor="start">SYD · BKK · PVG</text>
         <text class="cityB" x="960" y="158" text-anchor="end">HOME</text>
       </svg>
