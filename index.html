@@ -1,0 +1,787 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cony — Licensed Korean Beauty Coordinator</title>
+<meta name="description" content="Licensed medical coordinator in Seoul. Clinic matching, Korean interpreting, and full aftercare support for patients from Australia, Southeast Asia and China.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#EFEBE0;
+  --paper-2:#E6E1D3;
+  --sage:#8E9678;
+  --sage-deep:#5E6650;
+  --sage-dark:#2E3428;
+  --ink:#1B1D17;
+  --muted:#6E7063;
+  --line:rgba(27,29,23,.16);
+  --line-soft:rgba(27,29,23,.08);
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Instrument Sans','Noto Sans SC','Noto Sans KR','Noto Sans Thai',-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* paper grain */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
+:root:lang(th) h1{font-size:clamp(32px,5vw,58px);letter-spacing:0;line-height:1.28}
+:root:lang(th) h2,:root:lang(th) h3{letter-spacing:0;line-height:1.32}
+:lang(th) .eyebrow,:lang(th) .compare .h,:lang(th) .credlist b{text-transform:none;letter-spacing:.04em}
+:lang(ko) h1,:lang(ko) h2{letter-spacing:-.02em;line-height:1.2}
+:lang(th) body,:lang(th) .step p,:lang(th) .card p{line-height:1.75}
+h1{font-size:clamp(38px,6.4vw,74px)}
+h2{font-size:clamp(28px,4vw,46px)}
+h3{font-size:19px;letter-spacing:-.015em;line-height:1.3}
+.eyebrow{
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);font-weight:500;
+}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:56ch;line-height:1.6}
+section{padding:clamp(64px,9vw,124px) 0;position:relative}
+.rule{height:1px;background:var(--line-soft)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 26px;border-radius:2px;font-size:15px;font-weight:500;
+  border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  cursor:pointer;transition:.18s ease;letter-spacing:-.01em;
+}
+.btn:hover{background:var(--sage-dark);border-color:var(--sage-dark)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.btn.onsage{border-color:var(--paper);background:var(--paper);color:var(--ink)}
+.btn.onsage:hover{background:transparent;color:var(--paper)}
+.btn.sm{padding:10px 18px;font-size:14px}
+
+/* ---------- nav ---------- */
+header{
+  position:sticky;top:0;z-index:100;background:rgba(239,235,224,.88);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft);
+}
+nav{display:flex;align-items:center;gap:34px;height:66px}
+.brand{font-size:19px;font-weight:600;letter-spacing:-.03em;margin-right:auto}
+.brand span{color:var(--sage-deep);font-weight:400}
+.navlinks{display:flex;gap:28px;font-size:14.5px;color:var(--muted)}
+.navlinks a:hover{color:var(--ink)}
+.langtoggle{
+  border:1px solid var(--line);border-radius:2px;background:transparent;
+  font:inherit;font-size:13px;color:var(--muted);padding:7px 26px 7px 10px;cursor:pointer;
+  -webkit-appearance:none;appearance:none;letter-spacing:.01em;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%236E7063' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 9px center;
+}
+.langtoggle:hover{color:var(--ink);border-color:var(--muted)}
+.langtoggle:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.menubtn{display:none;border:0;background:transparent;cursor:pointer;padding:8px}
+.menubtn svg{display:block}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(56px,8vw,96px);padding-bottom:clamp(48px,7vw,88px)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);align-items:end}
+.hero h1{margin:20px 0 24px}
+.hero .lede{margin-bottom:34px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.portrait{
+  aspect-ratio:4/5;background:var(--sage);border-radius:2px;
+  display:flex;align-items:flex-end;padding:22px;color:var(--paper);
+  font-size:13px;letter-spacing:.02em;position:relative;overflow:hidden;
+}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.portrait span{position:relative;opacity:.8}
+
+/* ---------- trust strip ---------- */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-grid > div{padding:26px 0 26px 26px;border-left:1px solid var(--line-soft)}
+.trust-grid > div:first-child{border-left:0;padding-left:0}
+.trust-n{font-size:29px;font-weight:500;letter-spacing:-.03em;display:block}
+.trust-l{font-size:12.5px;color:var(--muted);letter-spacing:.02em;margin-top:2px;display:block}
+
+/* ---------- generic grids ---------- */
+.head{max-width:62ch;margin-bottom:clamp(36px,5vw,62px)}
+.head h2{margin:14px 0 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft)}
+.card{background:var(--paper);padding:30px 26px}
+.card h3{margin-bottom:9px}
+.card p{font-size:15px;color:var(--muted);line-height:1.6}
+.card .num{font-size:12px;color:var(--sage-deep);letter-spacing:.14em;display:block;margin-bottom:16px}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:start}
+.about-photo{aspect-ratio:3/4;background:var(--paper-2);border-radius:2px;position:relative;overflow:hidden}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about-body p{margin-bottom:18px;max-width:58ch}
+.credlist{list-style:none;margin-top:30px;border-top:1px solid var(--line-soft)}
+.credlist li{
+  display:flex;gap:20px;padding:15px 0;border-bottom:1px solid var(--line-soft);font-size:15px;
+}
+.licencecard{display:flex;gap:16px;align-items:center;margin-top:28px;padding:16px;border:1px solid var(--line);border-radius:2px;background:var(--paper)}
+.licencecard img{width:64px;height:88px;object-fit:cover;object-position:top;border:1px solid var(--line-soft);flex:0 0 64px;background:var(--paper-2)}
+.licencecard div{font-size:13px;color:var(--muted);line-height:1.5}
+.licencecard b{display:block;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:3px}
+.credlist b{flex:0 0 128px;font-weight:500;color:var(--muted);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:3px}
+
+/* ---------- sage block ---------- */
+.sageblock{background:var(--sage);color:var(--paper)}
+.sageblock .eyebrow,.sageblock .lede{color:rgba(239,235,224,.72)}
+.sageblock .rule{background:rgba(239,235,224,.2)}
+
+/* ---------- steps ---------- */
+.steps{counter-reset:s;border-top:1px solid rgba(239,235,224,.22)}
+.step{
+  display:grid;grid-template-columns:64px 1fr 1.15fr;gap:24px;align-items:start;
+  padding:26px 0;border-bottom:1px solid rgba(239,235,224,.22);
+}
+.step-n{font-size:12px;letter-spacing:.14em;opacity:.65;padding-top:5px}
+.step h3{font-size:21px}
+.step p{font-size:15px;color:rgba(239,235,224,.75);line-height:1.6}
+
+/* ---------- comparison ---------- */
+.compare{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;border:1px solid var(--line);font-size:14.5px}
+.compare > div{padding:15px 18px;border-bottom:1px solid var(--line-soft);border-right:1px solid var(--line-soft)}
+.compare .h{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--paper-2)}
+.compare .rowlab{color:var(--muted);font-size:13.5px}
+.compare .mine{background:rgba(142,150,120,.13);font-weight:500}
+.compare .h.mine{background:var(--sage);color:var(--paper)}
+
+/* ---------- testimonials ---------- */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:28px}
+.quote{border-top:2px solid var(--ink);padding-top:22px}
+.quote p{font-size:16.5px;line-height:1.55;margin-bottom:18px;letter-spacing:-.01em}
+.quote cite{font-style:normal;font-size:13px;color:var(--muted);letter-spacing:.02em}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line-soft)}
+summary{
+  padding:22px 40px 22px 0;cursor:pointer;list-style:none;position:relative;
+  font-size:17px;font-weight:500;letter-spacing:-.015em;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:'+';position:absolute;right:6px;top:20px;font-size:21px;font-weight:400;
+  color:var(--muted);transition:.2s;
+}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 24px;font-size:15.5px;color:var(--muted);max-width:66ch;line-height:1.65}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}
+.channels{display:grid;gap:10px;margin-top:26px}
+.chan{
+  display:flex;align-items:center;gap:14px;padding:15px 18px;border:1px solid rgba(239,235,224,.28);
+  border-radius:2px;transition:.18s;cursor:pointer;background:transparent;
+  font:inherit;font-size:15px;color:inherit;text-align:left;width:100%;
+}
+.chan:hover{background:rgba(239,235,224,.1);border-color:rgba(239,235,224,.55)}
+.chan .ic{width:22px;flex:0 0 22px;opacity:.85}
+.chan .meta{margin-left:auto;font-size:12.5px;opacity:.6}
+form{display:grid;gap:12px}
+.field{display:grid;gap:6px}
+.field label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+input,textarea,select{
+  font:inherit;font-size:15px;padding:13px 15px;border-radius:2px;
+  border:1px solid rgba(239,235,224,.3);background:rgba(239,235,224,.07);color:var(--paper);
+}
+input::placeholder,textarea::placeholder{color:rgba(239,235,224,.42)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--paper)}
+select option{color:var(--ink)}
+.formnote{font-size:12.5px;opacity:.6;line-height:1.5}
+
+/* ---------- partners (B2B, understated) ---------- */
+.partners{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,64px);align-items:center}
+
+/* ---------- footer ---------- */
+footer{background:var(--sage-dark);color:rgba(239,235,224,.72);padding:56px 0 40px;font-size:14px}
+.foot-grid{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.foot-grid a:hover{color:var(--paper)}
+.socials{display:flex;gap:18px;flex-wrap:wrap}
+.footnote{margin-top:40px;padding-top:22px;border-top:1px solid rgba(239,235,224,.15);font-size:12px;opacity:.6;line-height:1.6;max-width:70ch}
+
+/* ---------- mobile sticky ---------- */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:200;display:none;gap:1px;
+  background:var(--line);border-top:1px solid var(--line);
+}
+.sticky button,.sticky a{
+  flex:1;padding:15px 6px;background:var(--paper);text-align:center;font-size:13.5px;
+  font-weight:500;border:0;font-family:inherit;color:var(--ink);cursor:pointer;
+}
+.sticky .primary{background:var(--ink);color:var(--paper)}
+
+/* ---------- modal ---------- */
+.modal{
+  position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;
+  background:rgba(27,29,23,.62);padding:24px;
+}
+.modal.on{display:flex}
+.modal-in{background:var(--paper);padding:32px;border-radius:2px;max-width:330px;width:100%;text-align:center}
+.modal-in img{width:210px;height:210px;object-fit:contain;margin:20px auto;background:var(--paper-2)}
+.wxid{
+  font-size:19px;font-weight:500;letter-spacing:.02em;padding:12px;background:var(--paper-2);
+  border-radius:2px;margin-bottom:14px;user-select:all;
+}
+
+@media(max-width:880px){
+  .hero-grid,.about-grid,.contact-grid,.partners{grid-template-columns:1fr}
+  .portrait{aspect-ratio:16/11;order:-1}
+  .about-photo{aspect-ratio:16/11}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .trust-grid > div{padding:20px 0 20px 20px}
+  .trust-grid > div:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line-soft)}
+  .trust-grid > div:nth-child(4){border-top:1px solid var(--line-soft)}
+  .step{grid-template-columns:1fr;gap:8px;padding:22px 0}
+  .step-n{padding-top:0}
+  .compare{grid-template-columns:1fr;border:0}
+  .compare > div{border:1px solid var(--line-soft);margin-bottom:-1px}
+  .compare .h{margin-top:22px}
+  .navlinks{display:none}
+  .menubtn{display:block}
+  .sticky{display:flex}
+  body{padding-bottom:52px}
+}
+</style>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Cony<span>.</span></div>
+    <div class="navlinks">
+      <a href="#about"   data-i18n="misc1"></a>
+      <a href="#services"data-i18n="misc2"></a>
+      <a href="#how"     data-i18n="misc3"></a>
+      <a href="#faq"     data-i18n="misc4"></a>
+    </div>
+    <select class="langtoggle" id="langsel" aria-label="Language" onchange="setLang(this.value)"></select>
+    <a href="#contact" class="btn sm" data-i18n="misc5"></a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero1"></div>
+      <h1 data-i18n="hero2"></h1>
+      <p class="lede"
+         data-i18n="hero3"></p>
+      <div class="hero-cta">
+        <button class="btn" onclick="openChat()" data-i18n="hero4"></button>
+        <a href="#how" class="btn ghost" data-i18n="hero5"></a>
+      </div>
+    </div>
+    <div class="portrait">
+      <!-- ⚠️ 替换：把 Cony 的照片放到 assets/portrait.jpg -->
+      <img src="assets/portrait.jpg" alt="" onerror="this.style.display='none'">
+      <span data-i18n="hero6"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div><span class="trust-n" id="st-sessions"></span><span class="trust-l" data-i18n="trust1"></span></div>
+    <div><span class="trust-n" id="st-since"></span><span class="trust-l" data-i18n="trust2"></span></div>
+    <div><span class="trust-n" id="st-licensed"></span><span class="trust-l" data-i18n="trust3"></span></div>
+    <div><span class="trust-n">中 · EN · 한</span><span class="trust-l" data-i18n="trust4"></span></div>
+  </div>
+</section>
+
+<!-- ============ PAIN ============ -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-i18n="pain1"></div>
+      <h2 data-i18n="pain2"></h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3 data-i18n="pain3"></h3>
+        <p data-i18n="pain4"></p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="pain5"></h3>
+        <p data-i18n="pain6"></p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="pain7"></h3>
+        <p data-i18n="pain8"></p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="pain9"></h3>
+        <p data-i18n="pain10"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" style="background:var(--paper-2)">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <!-- ⚠️ 替换：assets/about.jpg -->
+      <img src="assets/about.jpg" alt="" onerror="this.style.display='none'">
+    </div>
+    <div class="about-body">
+      <div class="eyebrow" data-i18n="about1"></div>
+      <h2 style="margin:14px 0 22px"
+          data-i18n="about2"></h2>
+      <!-- ⚠️ 替换成 Cony 自己的故事，这段是模板 -->
+      <p style="font-size:18px;color:var(--ink)"
+         data-i18n="about3"></p>
+      <p data-i18n="about4"></p>
+      <p data-i18n="about5"></p>
+      <p data-i18n="about6"></p>
+      <p data-i18n="about7"></p>
+      <p data-i18n="about8"></p>
+      <ul class="credlist">
+        <li><b data-i18n="about9"></b><span id="cred-license"></span></li>
+        <li><b data-i18n="about10"></b><span id="cred-body"></span></li>
+        <li><b data-i18n="about11"></b><span data-i18n="about12"></span></li>
+        <li><b data-i18n="about13"></b><span data-i18n="about14"></span></li>
+        <li><b data-i18n="about15"></b><span id="cred-city"></span></li>
+        <li><b data-i18n="about16"></b><span data-i18n="about17"></span></li>
+      </ul>
+      <div class="licencecard">
+        <!-- ⚠️ 替换：assets/licence.jpg（登记证扫描件，地址等敏感信息可打码） -->
+        <img src="assets/licence.jpg" alt="" onerror="this.style.visibility='hidden'">
+        <div>
+          <b data-i18n="about18"></b>
+          <span data-i18n="about19"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-i18n="services1"></div>
+      <h2 data-i18n="services2"></h2>
+      <p class="lede" style="margin-top:16px"
+         data-i18n="services3"></p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="num">01</span>
+        <h3 data-i18n="services4"></h3>
+        <p data-i18n="services5"></p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3 data-i18n="services6"></h3>
+        <p data-i18n="services7"></p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3 data-i18n="services8"></h3>
+        <p data-i18n="services9"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how" class="sageblock">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-i18n="how1"></div>
+      <h2 style="margin-top:14px" data-i18n="how2"></h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h3 data-i18n="how3"></h3>
+        <p data-i18n="how4"></p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h3 data-i18n="how5"></h3>
+        <p data-i18n="how6"></p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h3 data-i18n="how7"></h3>
+        <p data-i18n="how8"></p>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <h3 data-i18n="how9"></h3>
+        <p data-i18n="how10"></p>
+      </div>
+      <div class="step">
+        <div class="step-n">05</div>
+        <h3 data-i18n="how11"></h3>
+        <p data-i18n="how12"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-i18n="compare1"></div>
+      <h2 data-i18n="compare2"></h2>
+    </div>
+    <div class="compare">
+      <div class="h"></div>
+      <div class="h" data-i18n="compare3"></div>
+      <div class="h" data-i18n="compare4"></div>
+      <div class="h mine" data-i18n="compare5"></div>
+
+      <div class="rowlab" data-i18n="compare6"></div>
+      <div data-i18n="compare7"></div>
+      <div data-i18n="compare8"></div>
+      <div class="mine" data-i18n="compare9"></div>
+
+      <div class="rowlab" data-i18n="compare10"></div>
+      <div data-i18n="compare11"></div>
+      <div data-i18n="compare12"></div>
+      <div class="mine" data-i18n="compare13"></div>
+
+      <div class="rowlab" data-i18n="compare14"></div>
+      <div data-i18n="compare15"></div>
+      <div data-i18n="compare16"></div>
+      <div class="mine" data-i18n="compare17"></div>
+
+      <div class="rowlab" data-i18n="compare18"></div>
+      <div data-i18n="compare19"></div>
+      <div data-i18n="compare20"></div>
+      <div class="mine" data-i18n="compare21"></div>
+
+      <div class="rowlab" data-i18n="compare22"></div>
+      <div data-i18n="compare23"></div>
+      <div data-i18n="compare24"></div>
+      <div class="mine" data-i18n="compare25"></div>
+
+      <div class="rowlab" data-i18n="compare26"></div>
+      <div data-i18n="compare27"></div>
+      <div data-i18n="compare28"></div>
+      <div class="mine" data-i18n="compare29"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow" data-i18n="testimonials1"></div>
+      <h2 data-i18n="testimonials2"></h2>
+    </div>
+    <!-- ⚠️ 替换成真实评价（截图脱敏后也可以放在下面） -->
+    <div class="quotes">
+      <div class="quote">
+        <p data-i18n="testimonials3"></p>
+        <cite data-i18n="testimonials4"></cite>
+      </div>
+      <div class="quote">
+        <p data-i18n="testimonials5"></p>
+        <cite data-i18n="testimonials6"></cite>
+      </div>
+      <div class="quote">
+        <p data-i18n="testimonials7"></p>
+        <cite data-i18n="testimonials8"></cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap" style="max-width:840px">
+    <div class="head">
+      <div class="eyebrow" data-i18n="faq1"></div>
+      <h2 data-i18n="faq2"></h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary data-i18n="faq3"></summary>
+        <p data-i18n="faq4"></p>
+      </details>
+      <details>
+        <summary data-i18n="faq5"></summary>
+        <p data-i18n="faq6"></p>
+      </details>
+      <details>
+        <summary data-i18n="faq7"></summary>
+        <p data-i18n="faq8"></p>
+      </details>
+      <details>
+        <summary data-i18n="faq9"></summary>
+        <p data-i18n="faq10"></p>
+      </details>
+      <details>
+        <summary data-i18n="faq11"></summary>
+        <p data-i18n="faq12"></p>
+      </details>
+      <details>
+        <summary data-i18n="faq13"></summary>
+        <p data-i18n="faq14"></p>
+      </details>
+      <details>
+        <summary data-i18n="faq15"></summary>
+        <p data-i18n="faq16"></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="sageblock">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow" data-i18n="contact1"></div>
+      <h2 style="margin:14px 0 18px" data-i18n="contact2"></h2>
+      <p class="lede" data-i18n="contact3"></p>
+      <div class="channels" id="channels"></div>
+      <div id="booking-block" style="display:none;margin-top:26px">
+        <div class="rule" style="margin-bottom:26px"></div>
+        <h3 style="margin-bottom:10px" data-i18n="contact4"></h3>
+        <p style="font-size:15px;opacity:.75;margin-bottom:16px" data-i18n="contact5"></p>
+        <a id="booking-link" class="btn onsage" target="_blank" rel="noopener" data-i18n="contact6"></a>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow" style="margin-bottom:16px" data-i18n="contact7"></div>
+      <form id="cform">
+        <div class="field">
+          <label data-i18n="contact8"></label>
+          <input name="name" required data-i18n-ph="contact9">
+        </div>
+        <div class="field">
+          <label data-i18n="contact10"></label>
+          <input name="contact" required data-i18n-ph="contact11">
+        </div>
+        <div class="field">
+          <label data-i18n="contact12"></label>
+          <input name="from" data-i18n-ph="contact13">
+        </div>
+        <div class="field">
+          <label data-i18n="contact14"></label>
+          <textarea name="message" rows="3" data-i18n-ph="contact15"></textarea>
+        </div>
+        <button class="btn onsage" type="submit" style="justify-content:center" data-i18n="contact16"></button>
+        <p class="formnote" data-i18n="contact17"></p>
+      </form>
+      <p id="formresult" style="margin-top:14px;font-size:15px;display:none"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS (B2B — 低调侧门) ============ -->
+<section style="background:var(--paper-2)">
+  <div class="wrap partners">
+    <div>
+      <div class="eyebrow" data-i18n="partners1"></div>
+      <h2 style="font-size:clamp(24px,3vw,34px);margin:12px 0 14px"
+          data-i18n="partners2"></h2>
+      <p style="font-size:15.5px;color:var(--muted);max-width:52ch"
+         data-i18n="partners3"></p>
+    </div>
+    <div>
+      <a id="partner-mail" class="btn ghost" data-i18n="partners4"></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="margin-right:auto">
+        <div style="font-size:19px;font-weight:600;color:var(--paper);letter-spacing:-.03em">Cony<span style="opacity:.5">.</span></div>
+        <div style="margin-top:6px" id="foot-tagline"></div>
+        <div style="margin-top:4px" id="foot-license"></div>
+        <div style="margin-top:4px;opacity:.75" id="foot-entity"></div>
+      </div>
+      <div class="socials" id="socials"></div>
+    </div>
+    <p class="footnote"
+       data-i18n="partners5"></p>
+  </div>
+</footer>
+
+<!-- mobile sticky -->
+<div class="sticky">
+  <button class="primary" onclick="openChat()" data-i18n="partners6"></button>
+  <a href="#how" data-i18n="partners7"></a>
+  <a href="#faq" data-i18n="partners8"></a>
+</div>
+
+<!-- wechat modal -->
+<div class="modal" id="wxmodal" onclick="if(event.target===this)closeWx()">
+  <div class="modal-in">
+    <div class="eyebrow" data-i18n="partners9"></div>
+    <img id="wxqr" src="" alt="WeChat QR" onerror="this.style.display='none'">
+    <div class="wxid" id="wxid"></div>
+    <button class="btn ghost" style="width:100%;justify-content:center" onclick="copyWx()" id="wxcopy" data-i18n="partners10"></button>
+    <button class="btn ghost" style="width:100%;justify-content:center;margin-top:8px;border:0" onclick="closeWx()" data-i18n="partners11"></button>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script>
+const C = window.CONY_CONFIG;
+const I = window.CONY_I18N;
+const LANGS = I.langs.map(x=>x.code);
+const HTMLLANG = { en:'en', zh:'zh-Hans', ko:'ko', th:'th' };
+
+/* 浏览器语言 -> 站点语言；认不出的一律给英文 */
+function detectLang(){
+  const saved = localStorage.getItem('cony-lang');
+  if(LANGS.includes(saved)) return saved;
+  for(const nav of (navigator.languages || [navigator.language || 'en'])){
+    const n = nav.toLowerCase();
+    if(n.startsWith('zh')) return 'zh';
+    if(n.startsWith('ko')) return 'ko';
+    if(n.startsWith('th')) return 'th';
+    if(n.startsWith('en')) return 'en';
+  }
+  return 'en';
+}
+let LANG = detectLang();
+
+/* 取一条文案；该语言缺失时回落英文，再缺就显示 key 方便排查 */
+const T = key => {
+  const row = I.strings[key];
+  if(!row) return '['+key+']';
+  return row[LANG] || row.en || '['+key+']';
+};
+
+function setLang(l){
+  if(!LANGS.includes(l)) l = 'en';
+  LANG = l; localStorage.setItem('cony-lang', l);
+  document.documentElement.lang = HTMLLANG[l] || l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.innerHTML = T(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    el.placeholder = T(el.getAttribute('data-i18n-ph'));
+  });
+  document.getElementById('langsel').value = l;
+  renderDynamic();
+}
+
+function buildLangSelect(){
+  const sel = document.getElementById('langsel');
+  sel.innerHTML = I.langs.map(x=>'<option value="'+x.code+'">'+x.label+'</option>').join('');
+}
+
+/* ---------- config-driven content ---------- */
+function renderDynamic(){
+  document.getElementById('st-sessions').textContent = C.stats.sessions;
+  document.getElementById('st-since').textContent    = C.stats.since;
+  document.getElementById('st-licensed').textContent = C.stats.licensed;
+
+  const licTxt = T('js_lic_prefix')+' '+C.license;
+  const lic = C.licenseUrl
+    ? '<a style="border-bottom:1px solid var(--line)" target="_blank" rel="noopener" href="'+C.licenseUrl+'">'+licTxt+'</a>'
+    : licTxt;
+  document.getElementById('cred-license').innerHTML = lic;
+  document.getElementById('cred-city').textContent  = T('js_city');
+  document.getElementById('cred-body').textContent  = T('js_licbody') + ' · 2026.02.13';
+
+  document.getElementById('foot-tagline').textContent = T('js_tagline');
+  document.getElementById('foot-license').textContent = T('js_lic_footer')+' '+C.license;
+  document.getElementById('foot-entity').textContent  = C.legalEntity;
+
+  const pm = document.getElementById('partner-mail');
+  pm.href = 'mailto:'+C.email+'?subject='+encodeURIComponent('Clinic partnership enquiry');
+
+  buildChannels();
+  buildSocials();
+
+  const bb = document.getElementById('booking-block');
+  if(C.bookingUrl){ bb.style.display='block'; document.getElementById('booking-link').href = C.bookingUrl; }
+}
+
+/* ---------- contact channels ---------- */
+function chan(label, meta, onclick, href){
+  const el = document.createElement(href ? 'a' : 'button');
+  el.className = 'chan';
+  if(href){ el.href = href; el.target='_blank'; el.rel='noopener'; }
+  else { el.type='button'; el.onclick = onclick; }
+  el.innerHTML = '<span>'+label+'</span><span class="meta">'+meta+'</span>';
+  return el;
+}
+function buildChannels(){
+  const box = document.getElementById('channels'); box.innerHTML='';
+  if(C.wechatId)  box.appendChild(chan('WeChat 微信', C.wechatId, openWx));
+  if(C.whatsapp)  box.appendChild(chan('WhatsApp', '+'+C.whatsapp, null, 'https://wa.me/'+C.whatsapp));
+  if(C.line)      box.appendChild(chan('LINE', C.line, null, 'https://line.me/R/ti/p/'+encodeURIComponent(C.line)));
+  if(C.kakao)     box.appendChild(chan('KakaoTalk', T('js_openchat'), null, C.kakao));
+  if(C.instagram) box.appendChild(chan('Instagram DM', T('js_dm'), null, C.instagram));
+  if(C.email)     box.appendChild(chan('Email', C.email, null, 'mailto:'+C.email));
+}
+function buildSocials(){
+  const s = document.getElementById('socials'); s.innerHTML='';
+  const add=(n,u)=>{ if(u){ const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener'; a.textContent=n; s.appendChild(a);} };
+  add('Instagram', C.instagram);
+  add(T('js_xhs'), C.xiaohongshu);
+  add('TikTok', C.tiktok);
+  add('YouTube', C.youtube);
+  add('Email', C.email ? 'mailto:'+C.email : '');
+}
+
+/* ---------- wechat modal ---------- */
+function openWx(){
+  document.getElementById('wxid').textContent = C.wechatId;
+  document.getElementById('wxqr').src = C.wechatQR;
+  document.getElementById('wxmodal').classList.add('on');
+}
+function closeWx(){ document.getElementById('wxmodal').classList.remove('on'); }
+function copyWx(){
+  navigator.clipboard.writeText(C.wechatId).then(()=>{
+    const b=document.getElementById('wxcopy'); const o=b.innerHTML;
+    b.innerHTML = T('js_copied'); setTimeout(()=>b.innerHTML=o,1600);
+  });
+}
+/* 中文访客优先弹微信，其他访客直接滚到联系区 */
+function openChat(){
+  if(LANG==='zh' && C.wechatId){ openWx(); }
+  else { document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeWx(); });
+
+/* ---------- form ---------- */
+document.getElementById('cform').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const out = document.getElementById('formresult');
+  out.style.display='block';
+  if(!C.formspreeId){
+    out.textContent = T('js_form_off');
+    return;
+  }
+  out.textContent = T('js_sending');
+  try{
+    const r = await fetch('https://formspree.io/f/'+C.formspreeId, {
+      method:'POST', headers:{'Accept':'application/json'}, body:new FormData(e.target)
+    });
+    out.textContent = r.ok ? T('js_sent') : T('js_error');
+    if(r.ok) e.target.reset();
+  }catch(err){
+    out.textContent = T('js_error');
+  }
+});
+
+buildLangSelect();
+setLang(LANG);
+</script>
