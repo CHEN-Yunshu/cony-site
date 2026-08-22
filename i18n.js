@@ -13,6 +13,36 @@ window.CONY_I18N = {
     { code: 'th', label: 'ไทย'  },
   ],
   strings: {
+  video1: {
+      en: 'Vlog',
+      zh: '视频',
+      ko: '브이로그',
+      th: 'วล็อก',
+    },
+    video2: {
+      en: 'What it actually looks like',
+      zh: '实际是什么样子',
+      ko: '실제로는 이런 모습입니다',
+      th: 'จริง ๆ แล้วเป็นแบบนี้',
+    },
+    video3: {
+      en: 'Consultation days, clinic corridors, the recovery week nobody films. Filmed by me, on the days I was working.',
+      zh: '面诊当天、诊所走廊、没人拍的恢复期。都是我自己在工作那几天拍的。',
+      ko: '상담 당일, 병원 복도, 아무도 찍지 않는 회복 기간. 제가 일하던 날 직접 찍은 영상입니다.',
+      th: 'วันไปปรึกษา ทางเดินในคลินิก และสัปดาห์พักฟื้นที่ไม่มีใครถ่าย ฉันถ่ายเองในวันที่ทำงานจริง',
+    },
+    video4: {
+      en: 'Watch on',
+      zh: '前往观看',
+      ko: '보러 가기',
+      th: 'ดูที่',
+    },
+    video5: {
+      en: 'Play video',
+      zh: '播放',
+      ko: '재생',
+      th: 'เล่นวิดีโอ',
+    },
     misc1: {
       en: 'About',
       zh: '关于我',

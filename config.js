@@ -33,6 +33,17 @@ window.CONY_CONFIG = {
   youtube:     '',
   email:       'hello@example.com',    // ⚠️
 
+  /* ---- 视频（留空数组则整块不显示）----
+     小红书没有对外嵌入接口，只能做外链卡片（type:'link'）。
+     首选 mp4：视频是她自己的，自己托管最快也最稳，海外访客一定打得开。
+     竖屏 9:16 最合适，每条压到 5MB 以内。 */
+  videos: [
+    // { type:'mp4',     src:'assets/vlog-1.mp4', poster:'assets/vlog-1.jpg', title:'江南面诊当天' },
+    // { type:'youtube', id:'dQw4w9WgXcQ',        poster:'',                  title:'首尔医美避雷' },
+    // { type:'link',    url:'https://www.xiaohongshu.com/user/profile/xxx',
+    //   poster:'assets/vlog-3.jpg', title:'更多日常', label:'小红书' },
+  ],
+
   /* ---- 预约与表单 ---- */
   // 翻译陪同按小时预约：填 Cal.com 或 Calendly 链接，留空则整块隐藏
   bookingUrl:  '',                     // 例如 'https://cal.com/cony/interpreting'
