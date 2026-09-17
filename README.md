@@ -89,4 +89,4 @@ python3 apply-proofread.py 回传的文案.xlsx
 
 正式网址：https://chen-yunshu.github.io/cony-site/
 
-修改提交并推送至 `main` 后，等待 GitHub Pages 构建完成。新版校对表保留在本地 `outputs/`，不随网站发布。
+修改提交并推送至 `main` 后，等待 GitHub Pages 构建完成。修改脚本、文案或样式时同步更新 `index.html` 资源链接的 `v` 版本号，避免浏览器混用旧资源。新版校对表保留在本地 `outputs/`，不随网站发布。
