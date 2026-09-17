@@ -6,6 +6,10 @@
 
 window.CONY_CONFIG = {
 
+  // 真实联系方式确认后改为 true；false 时不会对外使用下方示例号码。
+  contactsVerified: false,
+  legalEntityVerified: false, // 主体名称核实后再显示在页脚
+
   /* ---- 基本信息（⚠️ 全部需要替换） ---- */
   name:        'Cony',
   nameZh:      'Cony',

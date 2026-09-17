@@ -1,3 +1,5 @@
 .DS_Store
 *.bak
 preview.html
+__pycache__/
+outputs/
