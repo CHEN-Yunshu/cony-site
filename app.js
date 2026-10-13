@@ -19,44 +19,44 @@
 
   // Interface states live here; the editorial copy stays in i18n.js.
   const ui = {
-    pageTitle: ['Cony — China–Korea interpreting & media coordination', 'Cony — 中韩翻译、传媒合作与预约协调', 'Cony — 한중 통역·미디어 협업·예약 조율', 'Cony — ล่ามจีน–เกาหลี สื่อ และประสานงาน'],
-    pageDescription: ['Meet Cony: China–Korea business interpreting, media collaborations, and appointment coordination in Seoul.', '认识 Cony：中韩商务与展会翻译、自媒体合作、首尔医美预约陪同及色彩测试翻译。', '한중 비즈니스·전시 통역, 미디어 협업, 서울 클리닉 예약 동행과 퍼스널 컬러 통역을 하는 Cony를 만나보세요.', 'รู้จัก Cony กับงานล่ามธุรกิจจีน–เกาหลี งานสื่อ การนัดหมายคลินิก และล่ามวิเคราะห์สีในโซล'],
-    channelsPending: ['Contact details will be added soon. You can prepare a message below in the meantime.', '联系方式会在确认后放上来。你也可以先在这里整理一段留言。', '연락처는 확인 후 안내할 예정입니다. 아래에서 문의 내용을 먼저 정리하실 수 있어요.', 'จะเพิ่มช่องทางติดต่อเมื่อยืนยันแล้ว ระหว่างนี้คุณสามารถเตรียมข้อความด้านล่างได้'],
+    pageTitle: ['Cony — Beauty Appointments & Support in Korea', 'Cony — 赴韩美业预约与陪同', 'Cony — 한국 뷰티 예약·동행 서비스', 'Cony — บริการจองและพาเข้ารับบริการความงามในเกาหลี'],
+    pageDescription: ['Cony provides booking and accompaniment services for beauty visits to Korea, covering skin clinics, hair transplants, hair styling, makeup and personal colour consultations. Services include help with choosing providers, making appointments, interpreting during visits, and arranging chauffeured cars and other transport.', 'Cony 提供赴韩美业预约与陪同服务，涵盖皮肤科、植发、发型、妆造与色彩测试，协助机构筛选、预约、翻译陪同及包车等用车安排。', 'Cony는 한국을 방문하는 고객을 위한 뷰티 예약·동행 서비스를 제공합니다. 피부과, 모발이식, 헤어·메이크업, 퍼스널 컬러 등을 대상으로 기관 선택과 예약, 통역 동행, 차량 대절 등 필요한 차량 섭외를 돕습니다.', 'Cony ช่วยจองและพาเข้ารับบริการความงามในเกาหลี ทั้งคลินิกผิวหนัง ปลูกผม ทำผม แต่งหน้า และวิเคราะห์สีส่วนบุคคล โดยช่วยเลือกผู้ให้บริการ จองนัด เป็นล่ามระหว่างเข้ารับบริการ และประสานงานเรื่องรถพร้อมคนขับและการเดินทางอื่น ๆ'],
+    channelsPending: ['Contact details are being set up. You can prepare a message here, but it will not be sent.', '联系方式正在准备中。你可以先在这里整理留言，内容不会发送。', '연락처를 준비 중입니다. 여기서 문의 내용을 정리할 수 있지만 전송되지는 않습니다.', 'กำลังเตรียมช่องทางติดต่อ คุณสามารถร่างข้อความไว้ที่นี่ได้ แต่ข้อความจะยังไม่ถูกส่ง'],
     channelsReady: ['Choose the channel you use most.', '选一个你平时常用的方式就好。', '편한 연락 방법을 선택해 주세요.', 'เลือกช่องทางที่คุณสะดวกได้เลย'],
     pending: ['Coming soon', '稍后开放', '준비 중', 'เร็ว ๆ นี้'],
-    draftMode: ['Add your dates and what you need, then copy the message to use when you get in touch.', '先写好具体日期和需求，复制下来，联系时直接发就行。', '구체적인 날짜와 필요한 내용을 적고 복사해 두었다가 연락하실 때 보내주세요.', 'ระบุวันที่และสิ่งที่ต้องการ แล้วคัดลอกข้อความไว้ใช้เมื่อติดต่อ'],
-    connectedMode: ['Add your dates and what you need so Cony can check the schedule.', '写清具体日期和需求，方便 Cony 确认安排。', '일정을 확인할 수 있도록 구체적인 날짜와 필요한 내용을 적어주세요.', 'ระบุวันที่และสิ่งที่ต้องการให้ชัดเจน เพื่อให้ Cony ตรวจสอบตารางได้'],
+    draftMode: ['Add your preferred dates and needs, then copy the message and send it through a listed contact channel.', '填写预计日期和需求，复制留言后，通过页面提供的联系方式发给我。', '예정 날짜와 필요한 내용을 적고 복사한 뒤, 안내된 연락처로 보내주세요.', 'กรอกวันที่วางแผนไว้และสิ่งที่ต้องการ จากนั้นคัดลอกข้อความแล้วส่งมาทางช่องทางติดต่อที่ระบุบนหน้านี้'],
+    connectedMode: ['Share your preferred dates and needs so I can check the arrangements.', '写下预计日期和需求，方便我确认安排。', '예정 날짜와 필요한 도움을 적어주시면 가능한 일정을 확인해 드릴게요.', 'ระบุวันที่วางแผนไว้และสิ่งที่ต้องการ เพื่อให้ฉันตรวจสอบการนัดหมายได้ค่ะ'],
     draftSubmit: ['Prepare my message', '生成咨询留言', '문의 내용 정리하기', 'เตรียมข้อความสอบถาม'],
     sendSubmit: ['Send my enquiry', '发送咨询', '문의 보내기', 'ส่งคำถาม'],
     sending: ['Sending…', '发送中…', '보내는 중…', 'กำลังส่ง…'],
     draftNote: ['This makes a message on your device. Nothing is sent.', '这里会帮你整理留言，内容保留在当前页面，不会自动发送。', '현재 페이지에서 메시지만 정리합니다. 내용이 전송되지는 않습니다.', 'ระบบจะจัดข้อความไว้ในหน้านี้เท่านั้น ยังไม่มีการส่งข้อความ'],
-    connectedNote: ['Your details are used to respond to this enquiry. Please leave out medical records and other sensitive documents.', '这些信息用于回复你的咨询。病历等私密资料，等需要时再单独沟通。', '입력하신 정보는 문의 답변에 사용됩니다. 진료 기록 등 민감한 자료는 이 양식에 넣지 말아 주세요.', 'ข้อมูลนี้ใช้เพื่อตอบคำถามของคุณ กรุณาอย่าใส่เวชระเบียนหรือเอกสารส่วนตัวในแบบฟอร์มนี้'],
+    connectedNote: ['Your details are used to reply to this enquiry. Please do not include medical records or other sensitive documents here.', '这些信息用于回复咨询。请勿在此填写病历等私密资料，需要时再单独沟通。', '입력하신 정보는 문의 답변에 사용됩니다. 진료 기록 등 민감한 자료는 여기에 입력하지 말고, 필요한 경우 별도로 전달해 주세요.', 'ข้อมูลนี้ใช้เพื่อตอบคำถามของคุณ กรุณาอย่าใส่เวชระเบียนหรือข้อมูลส่วนตัวที่ละเอียดอ่อนในนี้ หากจำเป็น ค่อยส่งแยกผ่านช่องทางที่ตกลงกัน'],
     draftReady: ['Your message is ready to copy. It has not been sent.', '留言整理好了，可以复制。还没有发送。', '복사할 메시지를 정리했습니다. 아직 전송되지 않았습니다.', 'ข้อความพร้อมให้คัดลอกแล้ว ยังไม่ได้ส่ง'],
-    sent: ['Your enquiry was sent. Thank you for leaving your details.', '咨询已发送，谢谢你留下这些信息。', '문의가 전송되었습니다. 내용을 남겨주셔서 감사합니다.', 'ส่งคำถามแล้ว ขอบคุณที่ฝากรายละเอียดไว้'],
+    sent: ['Your enquiry has been sent. I will reply using the contact details you provided.', '咨询已发送。我会通过你留下的联系方式回复。', '문의가 전송되었습니다. 남겨주신 연락처로 답변드릴게요.', 'ส่งข้อความสอบถามแล้วค่ะ ฉันจะตอบกลับผ่านช่องทางติดต่อที่คุณให้ไว้'],
     error: ['The message did not go through. Your text is still here; please try again or use a contact channel.', '这次没能发送成功，填写的内容还在。可以重试，或通过联系方式直接发送。', '전송되지 않았습니다. 입력 내용은 그대로 남아 있으니 다시 시도하거나 다른 연락 방법을 이용해 주세요.', 'ส่งไม่สำเร็จ ข้อความของคุณยังอยู่ ลองอีกครั้งหรือใช้ช่องทางติดต่ออื่น'],
     copied: ['Copied', '已复制', '복사했습니다', 'คัดลอกแล้ว'],
     copyFailed: ['Please select and copy the text below.', '请选中下面的文字，手动复制。', '아래 내용을 선택해 직접 복사해 주세요.', 'กรุณาเลือกและคัดลอกข้อความด้านล่าง'],
     draftName: ['Name', '称呼', '이름', 'ชื่อ'],
     draftContact: ['Contact', '联系方式', '연락처', 'ช่องทางติดต่อ'],
-    draftFrom: ['Travelling from', '出发城市', '출발 도시', 'เดินทางจาก'],
+    draftFrom: ['', '', '', ''],
     draftService: ['Enquiry', '咨询内容', '문의 분야', 'เรื่องที่สอบถาม'],
-    draftDate: ['Date', '日期', '날짜', 'วันที่'],
+    draftDate: ['Preferred date', '预计日期', '예정 날짜', 'วันที่คาดไว้'],
     draftMessage: ['Plans and questions', '安排和问题', '일정과 질문', 'แผนและคำถาม'],
-    draftIntro: ['Hi Cony, here are the details of my enquiry.', '你好 Cony，这是我想咨询的事情和具体安排。', '안녕하세요 Cony, 문의 내용과 일정을 보내드립니다.', 'สวัสดี Cony นี่คือรายละเอียดและแผนที่อยากสอบถาม'],
+    draftIntro: ['Hi Cony, here are my plans and what I would like help with.', '你好 Cony，这是我的预计安排和需要的服务。', '안녕하세요 Cony, 예정 일정과 필요한 서비스를 보내드립니다.', 'สวัสดี Cony นี่คือแผนเบื้องต้นและบริการที่ฉันต้องการ'],
     servicePlaceholder: ['Choose a service', '请选择咨询内容', '문의 분야를 선택해 주세요', 'เลือกเรื่องที่ต้องการสอบถาม'],
-    serviceBusiness: ['Business & exhibition interpreting', '商务 / 展会翻译', '비즈니스·전시 통역', 'ล่ามธุรกิจและงานแสดงสินค้า'],
-    serviceMedia: ['China–Korea media collaboration', '中韩自媒体合作', '한중 미디어 협업', 'ความร่วมมือด้านสื่อจีน–เกาหลี'],
-    serviceClinic: ['Clinic appointments & interpreting', '医美预约 / 陪同翻译', '클리닉 예약·동행 통역', 'นัดหมายคลินิกและล่ามติดตาม'],
-    serviceColour: ['Personal colour & makeup styling', '色彩测试 / 妆造', '퍼스널 컬러·메이크업 스타일링', 'วิเคราะห์สีส่วนบุคคลและแต่งหน้า'],
+    serviceBusiness: ['Private cars & transport', '包车与用车安排', '차량 대절·이동 지원', 'รถพร้อมคนขับและการเดินทาง'],
+    serviceMedia: ['Agency partnerships / social media management / content collaborations', '机构合作／账号代运营／内容合作', '기관 제휴·SNS 운영 대행·콘텐츠 협업', 'ความร่วมมือกับธุรกิจ / ดูแลบัญชีโซเชียลมีเดีย / งานคอนเทนต์'],
+    serviceClinic: ['Provider selection & bookings', '机构筛选与预约', '기관 선택·예약', 'เลือกผู้ให้บริการและจองนัด'],
+    serviceColour: ['Interpreting & accompaniment', '翻译陪同', '통역 동행', 'ล่ามและผู้ช่วยระหว่างเข้ารับบริการ'],
     serviceOther: ['Another enquiry', '其他咨询', '기타 문의', 'คำถามอื่น ๆ'],
-    arrivalDate: ['Preferred appointment or service date', '希望预约 / 安排日期', '희망 예약·진행 날짜', 'วันที่ต้องการนัดหมายหรือใช้บริการ'],
+    arrivalDate: ['Preferred appointment / service date', '预计预约／服务日期', '예약·서비스 예정일', 'วันที่คาดว่าจะนัดหมาย / ใช้บริการ'],
     mediaDate: ['Preferred collaboration date (optional)', '期望合作时间（选填）', '희망 협업 날짜 (선택)', 'วันที่อยากร่วมงาน (ไม่บังคับ)'],
-    dateHint: ['Please choose a confirmed or planned date. It helps me check availability.', '请填写已经确定或计划中的具体日期，方便确认档期。', '가능한 일정을 확인할 수 있도록 확정 또는 예정 날짜를 선택해 주세요.', 'เลือกวันที่ยืนยันแล้วหรือวางแผนไว้ เพื่อช่วยตรวจสอบคิว'],
-    mediaDateHint: ['Remote collaborations are welcome. Add a date if you have one in mind.', '线上合作也可以。有预计时间的话，可以先写下来。', '온라인 협업도 가능합니다. 예정된 날짜가 있다면 적어주세요.', 'สามารถร่วมงานทางไกลได้ หากมีวันที่ในใจสามารถระบุไว้ได้'],
+    dateHint: ['A planned date is fine. If it is not confirmed, please say so in your message.', '可以填写计划日期；尚未确定时，请在需求中注明。', '예정 날짜를 입력하셔도 됩니다. 확정 전이라면 문의 내용에 적어주세요.', 'กรอกวันที่วางแผนไว้ได้ค่ะ หากยังไม่ยืนยัน กรุณาระบุไว้ในรายละเอียด'],
+    mediaDateHint: ['Add a proposed date if you have one. Otherwise, describe your timing in the message.', '有预计时间可以先填写；尚未确定，也可以在需求里说明。', '예상 날짜가 있으면 입력해 주세요. 미정이라면 문의 내용에 일정을 설명해 주셔도 됩니다.', 'หากมีวันที่วางแผนไว้ สามารถกรอกได้เลย หากยังไม่แน่นอน ให้ระบุไว้ในรายละเอียดค่ะ'],
     pastDate: ['Please choose today or a future date.', '请选择今天或之后的日期。', '오늘 또는 이후 날짜를 선택해 주세요.', 'กรุณาเลือกวันนี้หรือวันที่หลังจากนี้'],
     requiredField: ['Please fill in this field.', '这里还需要填写一下。', '이 항목을 입력해 주세요.', 'กรุณากรอกช่องนี้'],
     requiredService: ['Please choose what you need help with.', '请先选择咨询内容。', '문의 분야를 선택해 주세요.', 'กรุณาเลือกเรื่องที่ต้องการสอบถาม'],
-    requiredDate: ['Please add your preferred appointment or service date.', '请填写希望预约或安排的具体日期。', '예약 또는 진행을 희망하는 날짜를 입력해 주세요.', 'กรุณาระบุวันที่ต้องการนัดหมายหรือใช้บริการ'],
+    requiredDate: ['Please enter a confirmed or planned service date.', '请填写已确定或计划中的服务日期。', '확정되었거나 예정된 서비스 날짜를 입력해 주세요.', 'กรุณาระบุวันใช้บริการที่ยืนยันแล้วหรือวันที่วางแผนไว้'],
     requiredMessage: ['Please add a few details about what you need.', '请写一下具体需求。', '필요한 내용을 구체적으로 적어주세요.', 'กรุณาเขียนรายละเอียดสิ่งที่ต้องการ'],
     email: ['Email', '邮件', '이메일', 'อีเมล'],
     openChat: ['Open chat', '打开聊天', '대화하기', 'เปิดแชท'],
@@ -68,23 +68,23 @@
 
   function message(key) {
     const values = ui[key];
-    return values ? values[supported.indexOf(language)] || values[0] : '';
+    return values?.[supported.indexOf(language)] ?? values?.[0] ?? '';
   }
 
   function translated(key) {
-    const row = dictionary.strings && dictionary.strings[key];
-    return row ? row[language] || row.en || '' : '';
+    const row = dictionary.strings?.[key];
+    return row?.[language] ?? row?.en;
   }
 
   function plain(value) {
     const holder = document.createElement('div');
-    holder.innerHTML = String(value || '');
-    return holder.textContent || '';
+    holder.innerHTML = String(value ?? '');
+    return holder.textContent ?? '';
   }
 
   function text(id, value) {
     const node = $(id);
-    if (node) node.textContent = value || '';
+    if (node) node.textContent = value ?? '';
   }
 
   function detectLanguage() {
@@ -172,20 +172,20 @@
     }
     document.querySelectorAll('[data-i18n]').forEach(node => {
       const value = translated(node.dataset.i18n);
-      if (value) node.innerHTML = value;
+      if (value !== undefined) node.innerHTML = value;
     });
     document.querySelectorAll('[data-i18n-ph]').forEach(node => {
       const value = translated(node.dataset.i18nPh);
-      if (value) node.placeholder = plain(value);
+      if (value !== undefined) node.placeholder = plain(value);
     });
     document.querySelectorAll('[data-i18n-aria]').forEach(node => {
       const value = translated(node.dataset.i18nAria);
-      if (value) node.setAttribute('aria-label', plain(value));
+      if (value !== undefined) node.setAttribute('aria-label', plain(value));
     });
     if ($('langsel')) $('langsel').value = language;
-    document.title = plain(translated('page_title')) || message('pageTitle');
+    document.title = plain(translated('page_title') ?? message('pageTitle'));
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.content = plain(translated('page_description')) || message('pageDescription');
+    if (meta) meta.content = plain(translated('page_description') ?? message('pageDescription'));
     renderConfiguration();
     renderFormState();
     document.querySelectorAll('#cform [aria-invalid="true"]').forEach(renderFieldError);
@@ -271,7 +271,7 @@
       if (config.line) channels.push({ label: 'LINE', detail: config.line, url: `https://line.me/R/ti/p/${encodeURIComponent(config.line)}` });
       if (safeURL(config.kakao)) channels.push({ label: 'KakaoTalk', detail: message('openChat'), url: safeURL(config.kakao) });
       if (safeURL(config.instagram)) channels.push({ label: 'Instagram', detail: '↗', url: safeURL(config.instagram) });
-      if (safeURL(config.xiaohongshu)) channels.push({ label: plain(translated('js_xhs')) || 'RED', detail: '↗', url: safeURL(config.xiaohongshu) });
+      if (safeURL(config.xiaohongshu)) channels.push({ label: plain(translated('js_xhs') ?? 'RED'), detail: '↗', url: safeURL(config.xiaohongshu) });
       if (emailURL(config.email)) channels.push({ label: message('email'), detail: config.email, url: emailURL(config.email) });
     }
     channels.forEach(channel => {
@@ -316,7 +316,7 @@
     if (!verifiedContacts()) return;
     const links = [
       ['Instagram', safeURL(config.instagram)],
-      [plain(translated('js_xhs')) || 'RED', safeURL(config.xiaohongshu)],
+      [plain(translated('js_xhs') ?? 'RED'), safeURL(config.xiaohongshu)],
       ['TikTok', safeURL(config.tiktok)], ['YouTube', safeURL(config.youtube)],
       [message('email'), emailURL(config.email)],
     ];
@@ -403,7 +403,7 @@
     updateDateField();
   }
 
-  const serviceKeys = { business: 'serviceBusiness', media: 'serviceMedia', clinic: 'serviceClinic', colour: 'serviceColour', other: 'serviceOther' };
+  const serviceKeys = { clinic: 'serviceClinic', colour: 'serviceColour', business: 'serviceBusiness', media: 'serviceMedia', other: 'serviceOther' };
 
   function renderServiceOptions() {
     const select = $('contact-service');
@@ -470,12 +470,12 @@
 
   function getFormValues(form) {
     const values = new FormData(form);
-    return Object.fromEntries(['name', 'contact', 'from', 'service', 'date', 'message'].map(key => [key, String(values.get(key) || '').trim()]));
+    return Object.fromEntries(['name', 'contact', 'service', 'date', 'message'].map(key => [key, String(values.get(key) ?? '').trim()]));
   }
 
   function buildDraft(values) {
     const lines = [message('draftIntro'), ''];
-    [['name', 'draftName'], ['contact', 'draftContact'], ['from', 'draftFrom'], ['service', 'draftService'], ['date', 'draftDate'], ['message', 'draftMessage']].forEach(([field, key]) => {
+    [['name', 'draftName'], ['contact', 'draftContact'], ['service', 'draftService'], ['date', 'draftDate'], ['message', 'draftMessage']].forEach(([field, key]) => {
       const value = field === 'service' ? message(serviceKeys[values[field]]) : values[field];
       if (value) lines.push(`${message(key)}: ${value}`);
     });
